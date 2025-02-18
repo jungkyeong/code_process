@@ -19,10 +19,13 @@ OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 # Include directories
 INCLUDES = -I$(SRCDIR)
 
+# Library link
+LIBS = -L/usr/lib/x86_64-linux-gnu -lssl -lcrypto
+
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) -L$(LIBDIR)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) $(LIBS) 
 
 # Compile
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
