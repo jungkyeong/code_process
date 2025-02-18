@@ -1,26 +1,32 @@
-# Setting Compile
+# Compiler settings
 CC = g++
 CFLAGS = -Wall -g 
 
-# service name define
+# Service name
 TARGET = program-service
 
-# sorce file list all
-SRCS = $(wildcard *.cpp)
-
-# save object file root (save in "/obj")
+# file root
+SRCDIR = src
 OBJDIR = obj
+LIBDIR = lib
 
-# Build OBJ file
-OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
+# Source file
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+
+# Object file
+OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+
+# Include directories
+INCLUDES = -I$(SRCDIR)
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) -L$(LIBDIR)
 
-$(OBJDIR)/%.o: %.cpp | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+# Compile
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
