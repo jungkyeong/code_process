@@ -1,6 +1,6 @@
 # Compiler settings
 CC = g++
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -L$(JSONDIR)
 
 # DEBUG print
 # 0: DEBUG NOT, 1: DEBUG MODE
@@ -16,6 +16,7 @@ TARGET = program-service
 SRCDIR = src
 OBJDIR = obj
 LIBDIR = lib
+JSONDIR = lib/json
 
 # Source file
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
@@ -24,10 +25,10 @@ SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 # Include directories
-INCLUDES = -I$(SRCDIR)
+INCLUDES = -I$(SRCDIR) -I$(JSONDIR)
 
 # Library link
-LIBS = -L/usr/lib/x86_64-linux-gnu -lssl -lcrypto
+LIBS = -L/usr/lib/x86_64-linux-gnu -lssl -lcrypto -ljsoncpp
 
 all: $(TARGET)
 
