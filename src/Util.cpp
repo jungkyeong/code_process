@@ -14,6 +14,7 @@
   */
 
 #include "Util.h"
+#include "Define.h"
 
 /**
  * @brief file read data
@@ -28,7 +29,7 @@ int Util::read_from_file(const char *filename, void **data){
     FILE *file = fopen(filename, "rb");
     if (file == NULL) {
         DBG_PRINT("file open fail : %s \n", filename);
-        return 0;
+        return FAIL;
     }
 
     // get file size
@@ -42,7 +43,7 @@ int Util::read_from_file(const char *filename, void **data){
         DBG_PRINT("memory malloc fail \n");
         free(*data);
         fclose(file);
-        return -1;
+        return FAIL;
     }
 
     int read_len = fread(*data, 1, data_len, file);
@@ -50,7 +51,7 @@ int Util::read_from_file(const char *filename, void **data){
         DBG_PRINT("file read fail \n");
         free(*data);
         fclose(file);
-        return -1;
+        return FAIL;
     }
 
     ((char*)*data)[data_len] = '\0'; 
@@ -64,20 +65,20 @@ int Util::read_from_file(const char *filename, void **data){
 * @param filename input file root
 * @param data input file data
 * @param data_len input file length 
-* @return Success 0, Fail 1
+* @return Success 0, Fail -1
 */
 int Util::write_to_file(const char *filename, const void *data, size_t data_len){
     FILE *file = fopen(filename, "wb");
     if (file == NULL) {
         DBG_PRINT("Error opening file \n");
-        return 1;
+        return FAIL;
     }
     size_t written = fwrite(data, 1, data_len, file);
     if (written != data_len) {
         DBG_PRINT("Error writing to file \n");
         fclose(file);
-        return 1;
+        return FAIL;
     }
     fclose(file);
-    return 0;
+    return SUCCESS;
 }
