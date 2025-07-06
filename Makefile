@@ -1,6 +1,13 @@
 # Compiler settings
 CC = g++
-CFLAGS = -Wall -g 
+CFLAGS = -Wall -g
+
+# DEBUG print
+# 0: DEBUG NOT, 1: DEBUG MODE
+DEBUG ?= 1
+ifeq ($(DEBUG), 1)
+    CFLAGS += -DDEBUG
+endif
 
 # Service name
 TARGET = program-service

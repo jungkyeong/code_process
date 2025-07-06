@@ -27,7 +27,7 @@ int Util::read_from_file(const char *filename, void **data){
 
     FILE *file = fopen(filename, "rb");
     if (file == NULL) {
-        printf("file open fail : %s \n", filename);
+        DBG_PRINT("file open fail : %s \n", filename);
         return 0;
     }
 
@@ -39,7 +39,7 @@ int Util::read_from_file(const char *filename, void **data){
     // read data
     *data = malloc(data_len+1);
     if (*data == NULL) {
-        printf("memory malloc fail \n");
+        DBG_PRINT("memory malloc fail \n");
         free(*data);
         fclose(file);
         return -1;
@@ -47,7 +47,7 @@ int Util::read_from_file(const char *filename, void **data){
 
     int read_len = fread(*data, 1, data_len, file);
     if (read_len != data_len) {
-        printf("file read fail \n");
+        DBG_PRINT("file read fail \n");
         free(*data);
         fclose(file);
         return -1;
@@ -69,12 +69,12 @@ int Util::read_from_file(const char *filename, void **data){
 int Util::write_to_file(const char *filename, const void *data, size_t data_len){
     FILE *file = fopen(filename, "wb");
     if (file == NULL) {
-        printf("Error opening file \n");
+        DBG_PRINT("Error opening file \n");
         return 1;
     }
     size_t written = fwrite(data, 1, data_len, file);
     if (written != data_len) {
-        printf("Error writing to file \n");
+        DBG_PRINT("Error writing to file \n");
         fclose(file);
         return 1;
     }
