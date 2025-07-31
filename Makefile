@@ -28,7 +28,7 @@ OBJS = $(SRCS:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 INCLUDES = -I$(SRCDIR) -I$(JSONDIR)
 
 # Library link
-LIBS = -L/usr/lib/x86_64-linux-gnu -lssl -lcrypto -ljsoncpp
+LIBS = -L/usr/lib/x86_64-linux-gnu -lssl -lcrypto -ljsoncpp -ldl
 
 all: $(TARGET)
 
