@@ -11,14 +11,11 @@ Util util;
 
 int main() {
 
-    // json file make
-    Json::Value resroot;
-    resroot["key"] = "value";
-    resroot["dsa"] = "asd";
-    Json::StreamWriterBuilder abuilder;
-    resp_msg = Json::writeString(abuilder, resroot);
-    std::cout << resp_msg << std::endl;
+    // current time get
+    std::string asd = util.time_get();
 
+    std::string pw = util.get_input("user password: ");
+    std::cout << pw << std::endl;
 
     return 0;
 }

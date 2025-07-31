@@ -17,6 +17,13 @@
 #define __UTIL_HPP
 
 #include <iostream>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+#include <string>
+#include <termios.h>
+#include <unistd.h>
+#include <cstring>
 
 // Debug print
 #ifdef DEBUG
@@ -46,6 +53,43 @@ public:
      * @return Success 0, Fail -1
      */
     int write_to_file(const char *filename, const void *data, size_t data_len);
+
+    /**
+     * @brief Get the current time
+     * @return current time
+    */
+    std::string time_get();
+
+    /**
+     * @brief Get user input string
+     * @param guide_cmd guide print string
+     * @return input value
+    */
+    std::string get_input(std::string guide_cmd);
+
+    /**
+     * @brief string switch 32-> 64byte + \0  (ex.0x61 -> 61)
+     * @param hex_buffer unsigned char hex buffer
+     * @param buffer_len unsigned char hex buffer len
+     * @return string
+    */
+    std::string hex_to_hexstr(unsigned char* hex_buffer, int buffer_len);
+
+    /**
+     * @brief string switch 32-> 64byte + \0  (ex.0x61 -> 'a')
+     * @param hex_buffer unsigned char hex buffer
+     * @param buffer_len unsigned char hex buffer len
+     * @return string
+    */
+    std::string hex_to_str(unsigned char* hex_buffer, int buffer_len);
+
+    /**
+     * @brief string switch 2Byte('3','3') -> 1Byte ('33')
+     * @param inputdata char input data
+     * @param outputdata unsigned char hex output buffer
+     * @return output data length
+    */
+    int hexstr_to_hex(char *inputdata, unsigned char *outputdata);
 
 };
 
