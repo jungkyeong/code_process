@@ -193,7 +193,7 @@ int Util::hexstr_to_hex(char *inputdata, unsigned char *outputdata){
     // check odd number
     if(inputdata_len %2 !=0){
         DBG_PRINT("not inputdata pair \n");
-        return -1;
+        return FAIL;
     }
 
     unsigned char unsigned_inputdata[inputdata_len]={0,};
@@ -210,7 +210,7 @@ int Util::hexstr_to_hex(char *inputdata, unsigned char *outputdata){
         }
         else {
             DBG_PRINT("inputdata value Invalid \n");
-            return -1;
+            return FAIL;
         }
     }
     int outputdata_len = inputdata_len / 2;
